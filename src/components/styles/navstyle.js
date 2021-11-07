@@ -92,6 +92,9 @@ export const Dropdown = styled.div`
   .header img {
     width: 40px;
   }
+  .contents {
+    z-index: 1000;
+  }
 `;
 export const CityDisplay = styled.div`
   font-family: "Monsterrat", sans-serif;

@@ -54,9 +54,7 @@ const Navbar = (props) => {
       setState({});
     };
   }, [city]);
-  useEffect(() => {
-    console.log(props);
-  }, [props.city]);
+
   const checkInArray = (arr, val) => {
     for (var i = 0; i < arr.length; i++) {
       if (arr[i] === val) return 1;
@@ -91,7 +89,17 @@ const Navbar = (props) => {
       const matchedCities = matches.map((City) => {
         return (
           <React.Fragment key={City.name}>
-            <div>{City.name}</div>
+            <div
+              className="contents"
+              onClick={(e) => {
+                setCity(City.name);
+                setCollapse("none");
+                const element = document.getElementById("search");
+                element.value = City.name;
+              }}
+            >
+              {City.name}
+            </div>
             <hr></hr>
           </React.Fragment>
         );
@@ -113,6 +121,7 @@ const Navbar = (props) => {
         </NavItem>
         <SearchBox>
           <SearchBar
+            // id="search-bar"
             id="search"
             type="text"
             placeholder="Search Location"

@@ -50,7 +50,6 @@ const CurrentWeather = (props) => {
         FetchAQI(res.data.coord.lat, res.data.coord.lon);
       })
       .catch((e) => {
-        console.log(e.response);
         setError(e);
       });
   }, [props.city]);
