@@ -17,7 +17,7 @@ export const Container = styled.div`
   }
   .carousel-img {
     height: 400px;
-    opacity: 0.6;
+    opacity: 0.7;
   }
   @media (max-width: 1220px) {
     width: 50%;
