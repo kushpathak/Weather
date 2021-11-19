@@ -9,6 +9,7 @@ import Rain from "../images/rainy.png";
 import Sunny from "../images/sunny.png";
 import Smoke from "../images/smoke.png";
 import axios from "axios";
+import NewsFeed from "./NewsFeed";
 
 const SevenDayForecast = (props) => {
   const [error, setError] = useState(null);
@@ -68,7 +69,11 @@ const SevenDayForecast = (props) => {
           );
         }
       });
-      return <Container>{items};</Container>;
+      return (
+        <>
+          <Container id = "weekly">{items}</Container>
+        </>
+      );
     }
   };
   return fetchForecast();

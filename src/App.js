@@ -1,13 +1,15 @@
 import React from "react";
-import Navbar from "./components/navbar";
+import NavbarComponent from "./components/navbar";
 import "./appStyle.css";
 import CurrentWeather from "./components/CurrentWeather";
+import NewsFeed from "./components/NewsFeed";
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <NavbarComponent />
       <CurrentWeather />
+      {/* <NewsFeed /> */}
     </div>
   );
 }

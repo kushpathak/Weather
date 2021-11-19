@@ -1,12 +1,15 @@
 import styled from "styled-components";
+export const Container = styled.div`
+  background: url(${(props) => props.background});
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
 export const WeatherBox = styled.div`
   display: flex;
   align-items: center;
   /* justify-content: center; */
   min-height: 100vh;
-  background: url(${(props) => props.background});
-  background-repeat: no-repeat;
-  background-size: cover;
+
   flex-direction: column;
   overflow: hidden;
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import { WeatherBox, WeatherCard } from "./styles/currentWeatherStyle";
@@ -18,13 +18,30 @@ import CloudImg from "../images/cloudImg.jpg";
 import HazeImg from "../images/hazeImg.jpg";
 import FogImg from "../images/fog.jpg";
 import SevenDayForecast from "./sevenDayForecast";
+import NewsFeed from "./NewsFeed";
+import { Container } from "./styles/currentWeatherStyle";
+import Footer from "./Footer";
 
 const CurrentWeather = (props) => {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
   const [aqi, setAqi] = useState(null);
-  const [sunny, setSunny] = useState(false);
-
+  const [backgroundImage, setBackgroundImage] = useState(null);
+  const getBackground = (id) => {
+    if (id === "Clear") return ClearBackground;
+    else if (id === "Haze") return HazeImg;
+    else if (id === "Clouds") return CloudImg;
+    else if (id === "Mist") return MistyBackground;
+    else if (id === "Thunderstorm") return ThunderstormImg;
+    else if (id === "Rain") return RainyBackground;
+    else if (id === "Smoke") return FogImg;
+    else if (id === "Fog") return FogImg;
+  };
+  useEffect(() => {
+    // console.log(getBackground(weather.weather[0].main));
+    if (weather !== null)
+      setBackgroundImage(getBackground(weather.weather[0].main));
+  }, [weather]);
   const FetchAQI = (lat, lon) => {
     axios
       .get(
@@ -34,9 +51,11 @@ const CurrentWeather = (props) => {
         setAqi(res.data.list[0].main.aqi);
       })
       .catch((e) => {
-        setError(e.response);
+        console.log(e);
+        // setError(e.response);
       });
   };
+
   useEffect(() => {
     const City = props.city === null ? "Haldwani" : props.city;
     // console.log(props);
@@ -50,6 +69,7 @@ const CurrentWeather = (props) => {
         FetchAQI(res.data.coord.lat, res.data.coord.lon);
       })
       .catch((e) => {
+        // console.log(e);
         setError(e);
       });
   }, [props.city]);
@@ -91,16 +111,7 @@ const CurrentWeather = (props) => {
     else if (id === "Smoke") return Smoke;
     else if (id === "Fog") return Fog;
   };
-  const getBackground = (id) => {
-    if (id === "Clear") return ClearBackground;
-    else if (id === "Haze") return HazeImg;
-    else if (id === "Clouds") return CloudImg;
-    else if (id === "Mist") return MistyBackground;
-    else if (id === "Thunderstorm") return ThunderstormImg;
-    else if (id === "Rain") return RainyBackground;
-    else if (id === "Smoke") return FogImg;
-    else if (id === "Fog") return FogImg;
-  };
+
   const convertToCelcius = (temp) => {
     return Math.round(temp - 273.5);
   };
@@ -133,8 +144,8 @@ const CurrentWeather = (props) => {
       return LoadingDiv();
     } else {
       return (
-        <>
-          <WeatherBox background={getBackground(weather.weather[0].main)}>
+        <Container background={backgroundImage}>
+          <WeatherBox background={backgroundImage}>
             <WeatherCard sunny={weather.weather[0].main}>
               <div className="section-left">
                 <h5 className="first">CURRENT WEATHER</h5>
@@ -176,7 +187,9 @@ const CurrentWeather = (props) => {
             </WeatherCard>
             <SevenDayForecast coords={weather.coord} />
           </WeatherBox>
-        </>
+          <NewsFeed />
+          <Footer />
+        </Container>
       );
     }
   };

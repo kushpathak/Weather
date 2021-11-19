@@ -1,115 +1,136 @@
 import styled from "styled-components";
+import Search from "../../images/search.png";
 export const Nav = styled.nav`
-  background-color: ${(props) => props.background};
-  margin-top: 0px;
-`;
-export const Navlist = styled.ul`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 44px;
-  position: relative;
-`;
-export const NavItem = styled.li`
-  display: inline-block;
-  margin-right: 30px;
-  color: white;
-  font-weight: 500;
-  font-size: 18px;
-  font-family: "Montserrat", sans-serif;
-  @media (max-width: 700px) {
-    display: ${(props) => {
-      return props.display ? "none" : "inline-block";
-    }};
-  }
-  @media (max-width: 450px) {
-    font-size: 16px;
-  }
-`;
-export const NavImg = styled.img`
-  display: block;
-  width: 42px;
-  margin-right: 20px;
-`;
-export const SearchBar = styled.input`
-  padding: 10px;
-  border: none;
-  height: 30px;
-  font-size: 17px;
-  width: 300px;
-  @media (max-width: 794px) {
-    width: 200px;
-  }
-  @media (max-width: 450px) {
-    width: 160px;
-  }
-  @media (max-width: 390px) {
-    width: 150px;
-
-    margin-right: 5px;
-  }
-`;
-
-export const Dropdown = styled.div`
-  display: ${(props) => {
-    return props.collapse;
-  }};
-  color: black;
-  background-color: white;
-  height: fit-content;
-  position: absolute;
-  top: 38px;
-  /* margin-left: 454.5px; */
-  width: 300px;
-  @media (max-width: 794px) {
-    width: 200px;
-  }
-  @media (max-width: 450px) {
-    width: 160px;
-  }
-  h2 {
-    font-size: 15px;
-    /* text-align: center; */
-    margin-top: 10px;
-    display: block;
-    font-weight: 400;
-    z-index: 1000;
-    /* font-family: "Montserrat", sans-serif; */
-  }
-  h2:hover {
-    color: orangered;
-    cursor: pointer;
-  }
-  p {
-    font-size: 18px;
-    margin-left: 10px;
-  }
-  .header {
-    display: flex;
-    background-color: lightgrey;
-  }
-
-  .header img {
-    width: 40px;
-  }
-  .contents {
-    z-index: 1000;
-  }
-`;
-export const CityDisplay = styled.div`
-  font-family: "Monsterrat", sans-serif;
-
-  div {
-    padding: 10px;
-    font-size: 18px;
-    display: block;
-  }
-  div:hover {
-    background-color: whitesmoke;
-    cursor: pointer;
-  }
-`;
-export const SearchBox = styled.div`
+  /* position: relative; */
+  overflow: hidden;
+  width: 100%;
+  background-color: black;
   display: flex;
   flex-direction: column;
+`;
+export const NavContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-right: 5px;
+  margin-left: 5px;
+  @media (max-width: 995px) {
+    justify-content: space-between;
+  }
+  @media (max-width: 764px) {
+    justify-content: center;
+  }
+  @media (max-width: 450px) {
+    justify-content: flex-end;
+  }
+`;
+export const NavList = styled.ul`
+  list-style-type: none;
+  margin-top: 10px;
+  margin-right: 25px;
+  .hamburger {
+    display: none;
+    width: 40px;
+    margin-top: 8px;
+  }
+  .content {
+    /* position: absolute; */
+    /* left: 0px; */
+    width: 100%;
+  }
+  @media (max-width: 764px) {
+    .hamburger {
+      display: block;
+      margin-top: 12px;
+    }
+  }
+`;
+export const List = styled.li`
+  display: ${(props) => {
+    return props.inline ? "block" : "inline-block";
+  }};
+  color: white;
+  font-size: 20px;
+  margin-left: 30px;
+  margin-bottom: ${(props) => {
+    return props.marginBottom ? props.marginBottom : "0px";
+  }};
+  .nav-logo {
+    width: 40px;
+  }
+  :hover {
+    cursor: pointer;
+  }
+  @media (max-width: 995px) {
+    margin-left: 15px;
+    font-size: 18px;
+  }
+  @media (max-width: 803px) {
+    display: ${(props) => {
+      return props.early ? "none" : "";
+    }};
+    margin-right: 10px;
+  }
+  @media (max-width: 764px) {
+    display: ${(props) => {
+      return props.collapse ? "none" : "";
+    }};
+    .nav-logo {
+      width: 50px;
+    }
+  }
+  @media (max-width: 450px) {
+    .nav-logo {
+      display: none;
+    }
+  }
+`;
+export const SearchBar = styled.input`
+  border: none;
+  padding: 5px 10px;
+  font-size: 18px;
+  border: 0.5px solid white;
+  border-radius: 5px;
+  width: 300px;
+  margin-top: 2px;
+  margin-right: 10px;
+  background-image: url(${Search});
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  background-size: 30px;
+  padding-right: 15px;
+  @media (max-width: 995px) {
+    width: 250px;
+    margin-right: 0px;
+  }
+  @media (max-width: 764px) {
+    margin-top: 5px;
+    margin-right: -10px;
+  }
+  @media (max-width: 360px) {
+    width: 240px;
+  }
+`;
+export const Dropdown = styled.div`
+  overflow: hidden;
+  display: none;
+  width: 100%;
+  .seperator {
+    width: 100%;
+    border: none;
+    background-color: white;
+    height: 1px;
+    margin: 0px;
+    margin-bottom: 2px;
+  }
+  @media (max-width: 764px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  background-color: black;
+  max-height: 0px;
+  transition: max-height 0.5s ease-in;
 `;
